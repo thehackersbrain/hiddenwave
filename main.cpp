@@ -40,7 +40,6 @@ int argsHandler(int argc, char** argv) {
 int main(int argc, char** argv) {
 	banner();
 	string wavfile, message, outfile;
-	// int argStatus = argsHandler(argc, argv);
 	if (int argStatus = argsHandler(argc, argv) == 1) {
 		wavfile = (string) argv[2];
 		message = (string) argv[4];
