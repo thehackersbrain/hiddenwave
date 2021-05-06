@@ -1,4 +1,6 @@
 #include <iostream>
+#include "headers/main.h"
+#include "headers/Algorithm.h"
 
 using namespace std;
 
@@ -17,34 +19,104 @@ void banner(){
 void help(string packageName){
 	cout << "Usage: " << packageName << " [-h] [-f AUDIOFILE] [-m SECRETMSG] [-o OUTFILE]\n\nArguments:\n"
     "   -h, --help     Show this help message and exit\n" 
-    "   -f AUDIOFILE   Select Audio File\n"
+    "   -i INPUTFILE   Select Audio File\n"
     "   -m SECRETMSG   Enter Your Message\n"
+	"   -f SECRETFILE  Select the Secret File\n"
     "   -o OUTPUTFILE  Name of the output file (with .wav extension)\n\n" << endl;
 	system("read -p 'Press Enter to Continue...' var");
 }
 
 int argsHandler(int argc, char** argv) {
+	// int mode; // hide mode (message)
 	if (argc == 7) {
-		if ((string) argv[1] == "-f" || (string) argv[1] == "--file" && (string) argv[3] == "-m" || (string) argv[3] == "--message" && (string) argv[5] == "-o" || (string) argv[5] == "--output") {
-			return 1;
+		if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile" && (string) argv[3] == "-m" || (string) argv[3] == "--message" && (string) argv[5] == "-o" || (string) argv[5] == "--output") {
+			return 1; // hide mode (message)
+		} else if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile" && (string) argv[3] == "-f" || (string) argv[3] == "--file" && (string) argv[5] == "-o" || (string) argv[5] == "--output" ) {
+			return 2; // hide mode (file)
 		} else {
 			help((string) argv[0]);
-			return 0;
 		}
-	} else {
+	} else if (argc == 5) {
+		if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile" && (string) argv[3] == "-o" || (string) argv[4] == "--output") {
+			return 3; // extract mode (message or file)			
+		} else {
+			help((string) argv[0]);
+		}
+	}
+	else {
 		help((string) argv[0]);
 		return 0;
 	}
+	return 0;
+}
+
+int fileHandler(int mode, char** argv) {
+	string message, outfile, fileExt, inputExt;
+	string inputfile = (string) argv[2];
+	ifstream binStreamFile;
+	streampos binFileSize;
+	vector<char> msgBuffer;
+
+	// loading the input file in the stream
+	ifstream input(inputfile, ios::binary);
+	if (!input.is_open()) {
+		cout << "Error Encountered while opening the file." << endl;
+		return 0;
+	}
+
+	// copying the audio file into a buffer and closing it.
+	vector<char> buffer((istreambuf_iterator<char>(input)), (istreambuf_iterator<char>()));
+	if (mode == 3) {
+		fileExt = GetFileExtension(string(argv[4]));
+		inputExt = GetFileExtension(string(argv[2]));
+
+		binStreamFile.open(string(argv[2]), ios::binary);
+		binFileSize = binStreamFile.tellg();
+		msgBuffer.reserve(binFileSize); // Reserve the amount of memory for file size on vector.
+		msgBuffer.assign((istreambuf_iterator<char>(binStreamFile)), (istreambuf_iterator<char>()));
+		binStreamFile.close();
+	}
+	input.close();
+
+	// Modes:
+	// 1 => Hide a String
+	// 2 => Hide a File or Binary
+	// 3 => Extract the file
+
+	if (mode == 1) {
+		message = (string) argv[4];
+		inputExt = GetFileExtension((string) argv[2]);
+		int status = PlayWithWaveBuffer(buffer, message, inputExt);
+		if (status == SUCCESS) {
+			cout << "Data Hidden Successfully...\nCleaning Memory..." << endl;
+		} else if (status == ERROR) {
+			cout << "Something went wrong.\nCleaning Memory..." << endl;
+		}
+	} else if (mode == 2) {
+		int status = PlayWithWaveBuffer(buffer, msgBuffer, fileExt, inputExt);
+		if (status == SUCCESS) {
+			cout << "Data Hidden Successfully...\nCleaning Memory..." << endl;
+		} else if (status == ERROR) {
+			cout << "Something went wrong.\nCleaning Memory..." << endl;
+		}
+	} else if (mode == 3) {
+		int status = FindHiddenMessage(buffer);
+		if (status == SUCCESS) {
+			cout << "Data Extracted Successfully...\nCleaning Memory..." << endl;
+		} else if (status == ERROR) {
+			cout << "Something went wrong.\nCleaning Memory..." << endl;
+		}
+	}
+
+	// Force remove the buffer from memory
+	vector<char>().swap(buffer);
+	vector<char>().swap(msgBuffer);
+	return 0;
 }
 
 int main(int argc, char** argv) {
 	banner();
-	string wavfile, message, outfile;
-	if (int argStatus = argsHandler(argc, argv) == 1) {
-		wavfile = (string) argv[2];
-		message = (string) argv[4];
-		outfile = (string) argv[6];
-		cout << "Input File: " << wavfile << "\nMessage: " << message << "\nOutFile: " << outfile << endl;
-	}
+	int mode = argsHandler(argc, argv);
+	fileHandler(mode, argv);
 	return 0;
 }
