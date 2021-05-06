@@ -36,21 +36,24 @@ int argsHandler(int argc, char** argv) {
 		} else {
 			help((string) argv[0]);
 		}
-	} else if (argc == 5) {
-		if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile" && (string) argv[3] == "-o" || (string) argv[4] == "--output") {
+	} else if (argc == 3) {
+		// if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile" && (string) argv[3] == "-o" || (string) argv[4] == "--output") {
+		if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile") {
 			return 3; // extract mode (message or file)			
 		} else {
 			help((string) argv[0]);
+			exit(1);
 		}
 	}
 	else {
 		help((string) argv[0]);
-		return 0;
+		exit(1);
 	}
 	return 0;
 }
 
 int fileHandler(int mode, char** argv) {
+// int fileHandler(int mode, char** argv, string flExt, string inptExt) {
 	string message, outfile, fileExt, inputExt;
 	string inputfile = (string) argv[2];
 	ifstream binStreamFile;
@@ -119,4 +122,11 @@ int main(int argc, char** argv) {
 	int mode = argsHandler(argc, argv);
 	fileHandler(mode, argv);
 	return 0;
+}
+
+string GetFileExtension(const string& fileName) {
+	if (fileName.find_last_of(".") != string::npos) {
+		return fileName.substr(fileName.find_last_of(".") + 1);
+	}
+	return "";
 }
