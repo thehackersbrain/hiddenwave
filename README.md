@@ -78,13 +78,8 @@ sudo cp hiddenwave /usr/bin/
 ## Author
 
 **Creator:** [Gaurav Raj](https://github.com/thehackersbrain/)
-
 **Portfolio:** [Here](https://thehackersbrain.github.io/)
-
 **Blog:** [TheHackersBrain Blog](https://thehackersbrain.pythonanywhere.com)
-
 **Projects:** [Here](https://github.com/thehackersbrain?tab=repositories)
-
 **Twitter:** [@thehackersbrain](https://twitter.com/thehackersbrain)
-
 **TryHackMe:** [hackersbrain](https://tryhackme.com/p/hackersbrain)
