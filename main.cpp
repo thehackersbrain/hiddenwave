@@ -12,7 +12,7 @@ void banner(){
 "\\    Y    /  / /_/ / /_/ \\  ___/|   |  \\        /  / __ \\   /\\  ___/ \n"
 " \\___|_  /|__\\____ \\____ |\\___  >___|  /\\__/\\  /  (____ /\\_/  \\___ >\n"
 "       \\/         \\/    \\/    \\/     \\/      \\/        \\/         \\/ \n"
-"            \033[92mHide Your Secret Message in Audio wave File.\033[0m\n\n"
+"             \033[92mHide Your Files Message in Audio wave File.\033[0m\n\n"
 "                     [Author: \033[1;92mTheHackersBrain\033[0m]\n\n";
 }
 
