@@ -26,8 +26,8 @@ This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave)
 [x] Adding Support to hide files inside audio files
 [x] Adding Support to `.mp3` files
 [x] Improving UI by adding some colors
-[] Adding Password Support
-[] Implementing Some kind of Encryption
+[ ] Adding Password Support
+[ ] Implementing Some kind of Encryption
 
 ## Installation and Uses
 
