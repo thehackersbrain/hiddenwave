@@ -17,12 +17,12 @@ void banner(){
 }
 
 void help(string packageName){
-	cout << "Usage: " << packageName << " [-h] [-f AUDIOFILE] [-m SECRETMSG] [-o OUTFILE]\n\nArguments:\n"
+	cout << "Usage: " << packageName << " [-h] [-i AUDIOFILE] [-m SECRETMSG] [-o OUTFILE]\n\nArguments:\n"
     "   -h                Show this help message and exit\n" 
-    "   -i    INPUTFILE   Select Audio File\n"
-    "   -m    SECRETMSG   Enter Your Message\n"
-	"   -f    SECRETFILE  Select the Secret File\n"
-    "   -o    OUTPUTFILE  Name of the output file (with .wav extension)\n\n" << endl;
+    "   -i    INPUTFILE     Select Audio File\n"
+    "   -m    SECRETMSG     Enter Your Message\n"
+	"   -f    SECRETFILE    Select the Secret File\n"
+    "   -o    OUTPUTFILE    Name of the output file (with .wav extension)\n\n" << endl;
 }
 
 int argsHandler(int argc, char** argv) {
@@ -76,12 +76,6 @@ int fileHandler(int mode, char** argv) {
 	// copying the audio file into a buffer and closing it.
 	vector<char> buffer((istreambuf_iterator<char>(input)), (istreambuf_iterator<char>()));
 	if (mode == 3) {
-		// fileExt = GetFileExtension(string(argv[4]));
-		// inputExt = GetFileExtension(string(argv[2]));
-
-		// binStreamFile.open(string(argv[2]), ios::binary);
-		// binFileSize = binStreamFile.tellg();
-		// msgBuffer.reserve(binFileSize); // Reserve the amount of memory for file size on vector.
 		msgBuffer.assign((istreambuf_iterator<char>(binStreamFile)), (istreambuf_iterator<char>()));
 		binStreamFile.close();
 	}
