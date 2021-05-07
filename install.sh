@@ -2,7 +2,10 @@
 
 # installing dependencies and requirements
 sudo apt update -y
-sudo apt install libboost-all-dev cmake -y
+sudo apt install libboost-all-dev cmake git -y
+
+git clone https://github.com/thehackersbrain/hiddenwave.git
+cd hiddenwave
 
 if [[ `mkdir build` ]]; then
 	cd build
