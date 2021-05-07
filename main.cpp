@@ -23,7 +23,6 @@ void help(string packageName){
     "   -m SECRETMSG   Enter Your Message\n"
 	"   -f SECRETFILE  Select the Secret File\n"
     "   -o OUTPUTFILE  Name of the output file (with .wav extension)\n\n" << endl;
-	system("read -p 'Press Enter to Continue...' var");
 }
 
 int argsHandler(int argc, char** argv) {
@@ -37,7 +36,6 @@ int argsHandler(int argc, char** argv) {
 			help((string) argv[0]);
 		}
 	} else if (argc == 3) {
-		// if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile" && (string) argv[3] == "-o" || (string) argv[4] == "--output") {
 		if ((string) argv[1] == "-i" || (string) argv[1] == "--inputfile") {
 			return 3; // extract mode (message or file)			
 		} else {
