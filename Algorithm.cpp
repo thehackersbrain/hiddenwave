@@ -20,7 +20,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, string& msg, string& inputExt)
     // Verify if it is safe to hide the message. Must me at must half the size of the space avaible
     if(modulus <= 3)
     {
-        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
@@ -86,7 +86,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
 
     if (buffer.size()/4 <= msgBuffer.size())
     {
-        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
@@ -104,7 +104,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
     // Verify if it is safe to hide the message. Must me at must half the size of the space avaible
     if(modulus <= 3)
     {
-        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
@@ -333,7 +333,7 @@ int WriteMessageFromEnd(vector<char>& buffer, string msg)
     // Verify if it is safe to hide the message in the buffer
     if ((buffer.size() / 4) < msg.size())
     {
-        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
