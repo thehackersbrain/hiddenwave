@@ -15,12 +15,12 @@ int PlayWithWaveBuffer(vector<char>& buffer, string& msg, string& inputExt)
     // How many times the buffer is bigger than the message
     long modulus = ((buffer.size() - WAV_HEADER - START_SPACE) / (msg.size() + MY_HEADER));
 
-    cout << "Spreading level: " << modulus << endl;
+    cout << "[\033[0;92m+\033[0;0m] Spreading level: " << "\033[0;92m" << modulus << "\033[0;0m" << endl;
 
     // Verify if it is safe to hide the message. Must me at must half the size of the space avaible
     if(modulus <= 3)
     {
-        cout << "The message might be to big for the audio file" << endl;
+        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
         return ERROR;
     }
 
@@ -41,7 +41,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, string& msg, string& inputExt)
 
             if (pos == MY_HEADER)
             {
-                cout << "Header wrote" << endl;
+                cout << "[\033[0;92m+\033[0;0m] \033[0;92mHeader Written Successfully...\033[0;0m" << endl;
                 break;
             }
         }
@@ -73,7 +73,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, string& msg, string& inputExt)
 
     if (pos < msg.size())
     {
-        cout << "Maybe the whole file was not written in" << endl;
+        cout << "[\033[0;93m*\033[0;0m] \033[0;93mMaybe the whole file was not written in\033[0;0m" << endl;
     }
 
     return OutputBindedData(buffer, inputExt);
@@ -86,7 +86,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
 
     if (buffer.size()/4 <= msgBuffer.size())
     {
-        cout << "The message might be to big for the audio file" << endl;
+        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
         return ERROR;
     }
 
@@ -99,12 +99,12 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
     // buffer.size() - (HEADER SIZE = 44 bytes) - (My own tags to de hidden file = 3 bytes)
     long modulus = ((buffer.size() - WAV_HEADER - START_SPACE) / (msgBuffer.size() + MY_HEADER));
 
-    cout << "Spreading level: " << modulus << endl;
+    cout << "[\033[0;92m+\033[0;0m] Spreading level: " << "\033[0;92m" << modulus << "\033[0;0m" << endl;
 
     // Verify if it is safe to hide the message. Must me at must half the size of the space avaible
     if(modulus <= 3)
     {
-        cout << "The message might be to big for the audio file" << endl;
+        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
         return ERROR;
     }
 
@@ -125,7 +125,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
 
             if (pos == MY_HEADER)
             {
-                cout << "Header wrote" << endl;
+                cout << "[\033[0;92m+\033[0;0m] \033[0;92mHeader Written Successfully...\033[0;0m" << endl;
                 break;
             }
         }
@@ -156,7 +156,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
 
     if (pos < msgBuffer.size())
     {
-        cout << "Maybe the whole file was not written in" << endl;
+        cout << "[\033[0;93m*\033[0;0m] \033[0;93mMaybe the whole file was not written in\033[0;0m" << endl;
     }
 
     return OutputBindedData(buffer, inputExt);
@@ -173,7 +173,7 @@ int FindHiddenMessage(vector<char>& buffer)
 
     int n = 0;
     int pos = 0;
-    cout << "Looking for the hidden message..." << endl;
+    cout << "[\033m[0;93m*\033m[0;0m] \033m[0;93mLooking for the hidden message...\033m[0;0m" << endl;
     // Since the actual data of the wav starts at byte 44 we start from it. Everything above is just header things that we don't care atm
     for (vector<char>::iterator it = buffer.begin() + WAV_HEADER + START_SPACE;
          it != buffer.end(); ++it)
@@ -198,20 +198,20 @@ int FindHiddenMessage(vector<char>& buffer)
     delete[] customHeader;
 
     if (cHeader.GetType() == 'b')
-    {
-        cout << "File detected. Retrieving it..." << endl;
+    {   
+        cout << "[\033m[0;93m*\033m[0;0m] \033m[0;93mFile detected. Retrieving it...\033m[0;0m" << endl;
         cHeader.SetLastPosition(n);
         return FindHiddenBinaryInWave(buffer, cHeader);
     }
     else if (cHeader.GetType() == 't'){
-        cout << "String detected. Retrieving it..." << endl;
+        cout << "[\033m[0;93m*\033m[0;0m] \033m[0;93mString detected. Retrieving it...\033m[0;0m" << endl;
         cHeader.SetLastPosition(n);
         return FindHiddenTextInWave(buffer, cHeader);
     }
     else{
         // If it hits here it's because there was no message found in the file
-        cout << "Failed to detect a hidden file." << endl;
-        cout << "No custom header was found." << endl;
+        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;93mFailed to detect a hidden file.\033[0;91m" << endl;
+        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;93mNo custom header was found.\033[0;91m" << endl;
         return ERROR;
     }
 }
@@ -250,10 +250,10 @@ int FindHiddenTextInWave(vector<char>& buffer, CustomHeader& customHeader)
 
                         if (*tempIterator == 59){
                             // End of message reached
-                            cout << "Message recovered size: " << pos << " bytes" << endl;
+                            cout << "[\033[0;92m+\033[0;0m] Message recovered size: " << "\033[0;92m" << pos << "\033[0;0m" << " bytes" << endl;
 
                             // Output text
-                            cout << "Message: " << msgText.c_str() << endl;
+                            cout << "[\033[0;92m+\033[0;0m] Message: " << "\033[0;92m" << msgText.c_str() << "\033[0;0m" << endl;
                             return SUCCESS;
                         }
                     }
@@ -269,7 +269,7 @@ int FindHiddenTextInWave(vector<char>& buffer, CustomHeader& customHeader)
     }
 
     // If it hits here it's because there was no message found in the file
-    cout << "No message found :(" << endl;
+    cout << "[\033[0;91m-\033[0;0m] \033[0;91mNo message found :(\033[0;0m" << endl;
     return ERROR;
 
 }
@@ -308,7 +308,7 @@ int FindHiddenBinaryInWave(vector<char>& buffer, CustomHeader& customHeader)
 
                         if (*tempIterator == 59){
                             // End of message reached
-                            cout << "Message recovered size: " << pos << " bytes" << endl;
+                            cout << "[\033[0;92m+\033[0;0m] Message recovered size: " << "\033[0;92m" << pos << "\033[0;0m" << " bytes" << endl;
                             return OutputBinFile(msgBuffer, customHeader);
                         }
                     }
@@ -324,7 +324,7 @@ int FindHiddenBinaryInWave(vector<char>& buffer, CustomHeader& customHeader)
     }
 
     // If it hits here it's because there was no message found in the file
-    cout << "Could not find the end tags of the hidden file :(" << endl;
+    cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mCould not find the end tags of the hidden file :(\033m[0;0m" << endl;
     return ERROR;
 }
 
@@ -333,7 +333,7 @@ int WriteMessageFromEnd(vector<char>& buffer, string msg)
     // Verify if it is safe to hide the message in the buffer
     if ((buffer.size() / 4) < msg.size())
     {
-        cout << "The message might be to big for the audio file" << endl;
+        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
         return ERROR;
     }
 
@@ -369,7 +369,7 @@ int OutputBindedData(vector<char>& buffer, string& fileExtension)
     ofstream output(fileName, std::ios::binary);
     output.write((const char*)&buffer[0], buffer.size());
     output.close();
-    cout << "File has been saved as: " << fileName << endl;
+    cout << "[\033[0;92m+\033[0;0m] File has been saved as: " << "[\033[0;92m" << fileName << "\033[0;0m" << endl;
 
     return SUCCESS;
 }
@@ -385,7 +385,7 @@ int OutputBinFile(vector<char>& buffer, CustomHeader& cHeader)
     ofstream output(fileName, std::ios::binary);
     output.write((const char*)&buffer[0], buffer.size());
     output.close();
-    cout << "File has been saved as: " << fileName << endl;
+    cout << "[\033[0;92m+\033[0;0m] File has been saved as: " << "[\033[0;92m" << fileName << "\033[0;0m" << endl;
 
     return SUCCESS;
 }

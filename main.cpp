@@ -60,7 +60,7 @@ int fileHandler(int mode, char** argv) {
 	// loading the input file in the stream
 	ifstream input(inputfile, ios::binary);
 	if (!input.is_open()) {
-		cout << "Error Encountered while opening the file." << endl;
+		cout << "[\033[0;91m-\033[0;0m] \033[0;91mError Encountered while opening the file...\033[0;0m" << endl;
 		return 0;
 	}
 
@@ -88,23 +88,23 @@ int fileHandler(int mode, char** argv) {
 		inputExt = GetFileExtension((string) argv[2]);
 		int status = PlayWithWaveBuffer(buffer, message, inputExt);
 		if (status == SUCCESS) {
-			cout << "Data Hidden Successfully...\nCleaning Memory..." << endl;
+			cout << "[\033[0;92m+\033[0;0m] \033[0;92mData Hidden Successfully...\033[0;0m\n[\033[0;92m+\033[0;0m] \033[0;92mCleaning Memory...\033[0;0m" << endl;
 		} else if (status == ERROR) {
-			cout << "Something went wrong.\nCleaning Memory..." << endl;
+			cout << "[\033[0;91m-\033[0;0m] \033[0;91mSomething went wrong...\033[0;0m\n[\033[0;92m+\033[0;0m] \033[0;92mCleaning Memory...\033[0;0m" << endl;
 		}
 	} else if (mode == 2) {
 		int status = PlayWithWaveBuffer(buffer, msgBuffer, fileExt, inputExt);
 		if (status == SUCCESS) {
-			cout << "Data Hidden Successfully...\nCleaning Memory..." << endl;
+			cout << "[\033[0;92m+\033[0;0m] \033[0;92mData Hidden Successfully...\033[0;0m\n[\033[0;92m+\033[0;0m] \033[0;92mCleaning Memory...\033[0;0m" << endl;
 		} else if (status == ERROR) {
-			cout << "Something went wrong.\nCleaning Memory..." << endl;
+			cout << "[\033[0;91m-\033[0;0m] \033[0;91mSomething went wrong...\033[0;0m\n[\033[0;92m+\033[0;0m] \033[0;92mCleaning Memory...\033[0;0m" << endl;
 		}
 	} else if (mode == 3) {
 		int status = FindHiddenMessage(buffer);
 		if (status == SUCCESS) {
-			cout << "Data Extracted Successfully...\nCleaning Memory..." << endl;
+			cout << "[\033[0;92m+\033[0;0m] \033[0;92mData Extracted Successfully...\033[0;0m\n[\033[0;92m+\033[0;0m] \033[0;92mCleaning Memory...\033[0;0m" << endl;
 		} else if (status == ERROR) {
-			cout << "Something went wrong.\nCleaning Memory..." << endl;
+			cout << "[\033[0;91m-\033[0;0m] \033[0;91mSomething went wrong...\033[0;0m\n[\033[0;92m+\033[0;0m] \033[0;92mCleaning Memory...\033[0;0m" << endl;
 		}
 	}
 
