@@ -20,7 +20,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, string& msg, string& inputExt)
     // Verify if it is safe to hide the message. Must me at must half the size of the space avaible
     if(modulus <= 3)
     {
-        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
@@ -86,7 +86,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
 
     if (buffer.size()/4 <= msgBuffer.size())
     {
-        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
@@ -104,7 +104,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
     // Verify if it is safe to hide the message. Must me at must half the size of the space avaible
     if(modulus <= 3)
     {
-        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
@@ -173,7 +173,7 @@ int FindHiddenMessage(vector<char>& buffer)
 
     int n = 0;
     int pos = 0;
-    cout << "[\033[0;92m*\033m[0;0m] \033[0;92mLooking for the hidden message...\033m[0;0m" << endl;
+    cout << "[\033[0;92m*\033[0;0m] \033[0;92mLooking for the hidden message...\033[0;0m" << endl;
     // Since the actual data of the wav starts at byte 44 we start from it. Everything above is just header things that we don't care atm
     for (vector<char>::iterator it = buffer.begin() + WAV_HEADER + START_SPACE;
          it != buffer.end(); ++it)
@@ -199,19 +199,19 @@ int FindHiddenMessage(vector<char>& buffer)
 
     if (cHeader.GetType() == 'b')
     {   
-        cout << "[\033[0;92m*\033m[0;0m] \033[0;92mFile detected. Retrieving it...\033m[0;0m" << endl;
+        cout << "[\033[0;92m*\033[0;0m] \033[0;92mFile detected. Retrieving it...\033[0;0m" << endl;
         cHeader.SetLastPosition(n);
         return FindHiddenBinaryInWave(buffer, cHeader);
     }
     else if (cHeader.GetType() == 't'){
-        cout << "[\033[0;92m*\033m[0;0m] \033[0;92mString detected. Retrieving it...\033m[0;0m" << endl;
+        cout << "[\033[0;92m*\033[0;0m] \033[0;92mString detected. Retrieving it...\033[0;0m" << endl;
         cHeader.SetLastPosition(n);
         return FindHiddenTextInWave(buffer, cHeader);
     }
     else{
         // If it hits here it's because there was no message found in the file
-        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;91mFailed to detect a hidden file.\033[0;91m" << endl;
-        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;91mNo custom header was found.\033[0;91m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mFailed to detect a hidden file.\033[0;91m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mNo custom header was found.\033[0;91m" << endl;
         return ERROR;
     }
 }
@@ -324,7 +324,7 @@ int FindHiddenBinaryInWave(vector<char>& buffer, CustomHeader& customHeader)
     }
 
     // If it hits here it's because there was no message found in the file
-    cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mCould not find the end tags of the hidden file :(\033m[0;0m" << endl;
+    cout << "[\033[0;91m-\033[0;0m] [\033[0;91mCould not find the end tags of the hidden file :(\033[0;0m" << endl;
     return ERROR;
 }
 
@@ -333,7 +333,7 @@ int WriteMessageFromEnd(vector<char>& buffer, string msg)
     // Verify if it is safe to hide the message in the buffer
     if ((buffer.size() / 4) < msg.size())
     {
-        cout << "[\033[0;91m-\033m[0;0m] [\033[0;91mThe message might be to big for the audio file\033m[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] [\033[0;91mThe message might be to big for the audio file\033[0;0m" << endl;
         return ERROR;
     }
 
