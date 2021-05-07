@@ -22,6 +22,10 @@ This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave)
     sudo apt install cmake -y
     ```
 
+## Todo
+- Adding Password Support
+- Implementing Some kind of Encryption
+
 ## Installation and Uses
 
 ### Automated Installation (Recommanded)
