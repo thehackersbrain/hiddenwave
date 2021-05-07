@@ -1,37 +1,91 @@
-## Welcome to GitHub Pages
+# HiddenWave
+> Hide your personal Data inside The Audio wav file<br/>
+> Written in C++ by Gaurav Raj \[TheHackersBrain\]
 
-You can use the [editor on GitHub](https://github.com/thehackersbrain/hiddenwave/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+![bannerImage](https://raw.githubusercontent.com/thehackersbrain/thehackersbrain.github.io/master/images/joker/hiddenwave.png)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Hiddenwave is a simple audio steganography tool written in **C++** for hiding your files or messages inside a `.wav` or `.mp3` audio file. You might be wondering, In **C++** :confused: ?? You could have done it easily in **Python** :expressionless:. Yeah! I could but we are hackers Gentleman, We love challenges :sunglasses:.
+This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave) created by [Techchip](https://github.com/techchipnet).
 
-### Markdown
+**NOTE:** This tool only supports the `.mp3` and `.wav` audio files and can hide any other files inside the audio file.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Version
+**Hiddenwave 1.2.1**
 
-```markdown
-Syntax highlighted code block
+## Requirement
+- [libboost-all-dev](https://packages.debian.org/search?keywords=libboost-all-dev)
+    ```
+    sudo apt install libboost-all-dev -y
+    ```
+- [cmake](https://cmake.org/)
+    ```
+    sudo apt install cmake -y
+    ```
 
-# Header 1
-## Header 2
-### Header 3
+## Todo
+- [x] Adding Support to hide files inside audio files
+- [x] Adding Support to `.mp3` files
+- [x] Improving UI by adding some colors
 
-- Bulleted
-- List
+## Installation and Uses
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### Automated Installation (Recommanded)
+Change the directory to where you want to install this tool and run the follwing command
+```
+curl https://raw.githubusercontent.com/thehackersbrain/hiddenwave/main/install.sh -s | bash
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Manual Installation
 
-### Jekyll Themes
+- Make Sure all requirements are installed
+```
+sudo apt install libboost-all-dev cmake -y
+```
+- Git clone this repo and change the directory
+```
+git clone https://github.com/thehackersbrain/hiddenwave.git && cd hiddenwave
+```
+- Now Build the package
+```
+mkdir build && cd build && cmake ..
+```
+- Now make the final binary
+```
+make
+```
+- Copy the binary in `/usr/bin/` for easy access \(optional\)
+```
+sudo cp hiddenwave /usr/bin/
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/thehackersbrain/hiddenwave/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## How to Use
 
-### Support or Contact
+### Hiding Data
+- For hiding files inside `.wav` audio file.
+    ```
+    ./hiddenwave -i input.wav -f filetobehidden.txt -o output.wav
+    ```
+- For hiding message inside `.wav` audio file.
+    ```
+    ./hiddenwave -i input.wav -m 'Dummy Message' -o output.wav
+    ```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Extracting Data
+
+```
+./hiddenwave -i output.wav
+```
+- If the hidden data is some message, it will be printed on the terminal.
+- If the hidden data is a file, it will be extracted on the current directory.
+
+## Credits
+**Inspired by:** [HiddenWave](https://github.com/techchipnet/HiddenWave) by [Techchip](https://github.com/techchipnet)
+
+## Author
+
+**Creator:** [Gaurav Raj](https://github.com/thehackersbrain/)<br/>
+**Portfolio:** [Here](https://thehackersbrain.github.io/)<br/>
+**Blog:** [TheHackersBrain Blog](https://thehackersbrain.pythonanywhere.com)<br/>
+**Projects:** [Here](https://github.com/thehackersbrain?tab=repositories)<br/>
+**Twitter:** [@thehackersbrain](https://twitter.com/thehackersbrain)<br/>
+**TryHackMe:** [hackersbrain](https://tryhackme.com/p/hackersbrain)
