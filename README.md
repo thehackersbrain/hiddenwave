@@ -4,7 +4,7 @@
 
 ![bannerImage](https://raw.githubusercontent.com/thehackersbrain/thehackersbrain.github.io/master/images/joker/hiddenwave.png)
 
-Hiddenwave is a simple audio steganography tool written in **C++** for hiding your files or messages inside a `.wav` or `.mp3` audio file. You might be wondering, In **C++** ?? You could have done it easily in **Python**. I could but we are hackers Gentleman, We love challenges :smile:
+Hiddenwave is a simple audio steganography tool written in **C++** for hiding your files or messages inside a `.wav` or `.mp3` audio file. You might be wondering, In **C++** :confused: ?? You could have done it easily in **Python** :expressionless:. Yeah! I could but we are hackers Gentleman, We love challenges :sunglasses:
 This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave) created by [Techchip](https://github.com/techchipnet).
 
 **NOTE:** This tool only supports the `.mp3` and `.wav` audio files and can hide any other files inside the audio file.
