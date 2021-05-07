@@ -10,7 +10,7 @@ This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave)
 **NOTE:** This tool only supports the `.mp3` and `.wav` audio files and can hide any other files inside the audio file.
 
 ## Version
-**Hiddenwave 1.0.0** \(Early Release\)
+**Hiddenwave 1.2.1**
 
 ## Requirement
 - [libboost-all-dev](https://packages.debian.org/search?keywords=libboost-all-dev)
@@ -23,8 +23,11 @@ This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave)
     ```
 
 ## Todo
-- Adding Password Support
-- Implementing Some kind of Encryption
+[x] Adding Support to hide files inside audio files
+[x] Adding Support to `.mp3` files
+[x] Improving UI by adding some colors
+[] Adding Password Support
+[] Implementing Some kind of Encryption
 
 ## Installation and Uses
 
