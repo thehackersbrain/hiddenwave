@@ -40,12 +40,12 @@ int argsHandler(int argc, char** argv) {
 			return 3; // extract mode (message or file)			
 		} else {
 			help((string) argv[0]);
-			exit(1);
+			exit(0);
 		}
 	}
 	else {
 		help((string) argv[0]);
-		exit(1);
+		exit(0);
 	}
 	return 0;
 }
