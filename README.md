@@ -23,6 +23,15 @@ This tool is inspired by [HiddenWave](https://github.com/techchipnet/HiddenWave)
     ```
 
 ## Installation and Uses
+
+### Automated Installation (Recommanded)
+Change the directory to where you want to install this tool and run the follwing command
+```
+curl https://raw.githubusercontent.com/thehackersbrain/hiddenwave/main/install.sh -s | bash
+```
+
+### Manual Installation
+
 - Make Sure all requirements are installed
 ```
 sudo apt install libboost-all-dev cmake -y
