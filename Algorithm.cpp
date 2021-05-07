@@ -73,7 +73,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, string& msg, string& inputExt)
 
     if (pos < msg.size())
     {
-        cout << "[\033[0;93m*\033[0;0m] \033[0;93mMaybe the whole file was not written in\033[0;0m" << endl;
+        cout << "[\033[0;91m*\033[0;0m] \033[0;91mMaybe the whole file was not written in\033[0;0m" << endl;
     }
 
     return OutputBindedData(buffer, inputExt);
@@ -156,7 +156,7 @@ int PlayWithWaveBuffer(vector<char>& buffer, vector<char>& msgBuffer, string& fi
 
     if (pos < msgBuffer.size())
     {
-        cout << "[\033[0;93m*\033[0;0m] \033[0;93mMaybe the whole file was not written in\033[0;0m" << endl;
+        cout << "[\033[0;91m*\033[0;0m] \033[0;91mMaybe the whole file was not written in\033[0;0m" << endl;
     }
 
     return OutputBindedData(buffer, inputExt);
@@ -173,7 +173,7 @@ int FindHiddenMessage(vector<char>& buffer)
 
     int n = 0;
     int pos = 0;
-    cout << "[\033m[0;93m*\033m[0;0m] \033m[0;93mLooking for the hidden message...\033m[0;0m" << endl;
+    cout << "[\033[0;92m*\033m[0;0m] \033[0;92mLooking for the hidden message...\033m[0;0m" << endl;
     // Since the actual data of the wav starts at byte 44 we start from it. Everything above is just header things that we don't care atm
     for (vector<char>::iterator it = buffer.begin() + WAV_HEADER + START_SPACE;
          it != buffer.end(); ++it)
@@ -199,19 +199,19 @@ int FindHiddenMessage(vector<char>& buffer)
 
     if (cHeader.GetType() == 'b')
     {   
-        cout << "[\033m[0;93m*\033m[0;0m] \033m[0;93mFile detected. Retrieving it...\033m[0;0m" << endl;
+        cout << "[\033[0;92m*\033m[0;0m] \033[0;92mFile detected. Retrieving it...\033m[0;0m" << endl;
         cHeader.SetLastPosition(n);
         return FindHiddenBinaryInWave(buffer, cHeader);
     }
     else if (cHeader.GetType() == 't'){
-        cout << "[\033m[0;93m*\033m[0;0m] \033m[0;93mString detected. Retrieving it...\033m[0;0m" << endl;
+        cout << "[\033[0;92m*\033m[0;0m] \033[0;92mString detected. Retrieving it...\033m[0;0m" << endl;
         cHeader.SetLastPosition(n);
         return FindHiddenTextInWave(buffer, cHeader);
     }
     else{
         // If it hits here it's because there was no message found in the file
-        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;93mFailed to detect a hidden file.\033[0;91m" << endl;
-        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;93mNo custom header was found.\033[0;91m" << endl;
+        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;91mFailed to detect a hidden file.\033[0;91m" << endl;
+        cout << "[\033m[0;91m-\033m[0;0m] \033m[0;91mNo custom header was found.\033[0;91m" << endl;
         return ERROR;
     }
 }
@@ -369,7 +369,7 @@ int OutputBindedData(vector<char>& buffer, string& fileExtension)
     ofstream output(fileName, std::ios::binary);
     output.write((const char*)&buffer[0], buffer.size());
     output.close();
-    cout << "[\033[0;92m+\033[0;0m] File has been saved as: " << "[\033[0;92m" << fileName << "\033[0;0m" << endl;
+    cout << "[\033[0;92m+\033[0;0m] File has been saved as: " << "\033[0;92m" << fileName << "\033[0;0m" << endl;
 
     return SUCCESS;
 }
@@ -385,7 +385,7 @@ int OutputBinFile(vector<char>& buffer, CustomHeader& cHeader)
     ofstream output(fileName, std::ios::binary);
     output.write((const char*)&buffer[0], buffer.size());
     output.close();
-    cout << "[\033[0;92m+\033[0;0m] File has been saved as: " << "[\033[0;92m" << fileName << "\033[0;0m" << endl;
+    cout << "[\033[0;92m+\033[0;0m] File has been saved as: " << "\033[0;92m" << fileName << "\033[0;0m" << endl;
 
     return SUCCESS;
 }
