@@ -51,7 +51,6 @@ int argsHandler(int argc, char** argv) {
 }
 
 int fileHandler(int mode, char** argv) {
-// int fileHandler(int mode, char** argv, string flExt, string inptExt) {
 	string message, outfile, fileExt, inputExt;
 	string inputfile = (string) argv[2];
 	ifstream binStreamFile;
