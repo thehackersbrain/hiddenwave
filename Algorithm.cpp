@@ -210,8 +210,8 @@ int FindHiddenMessage(vector<char>& buffer)
     }
     else{
         // If it hits here it's because there was no message found in the file
-        cout << "[\033[0;91m-\033[0;0m] \033[0;91mFailed to detect a hidden file.\033[0;91m" << endl;
-        cout << "[\033[0;91m-\033[0;0m] \033[0;91mNo custom header was found.\033[0;91m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mFailed to detect a hidden file...\033[0;0m" << endl;
+        cout << "[\033[0;91m-\033[0;0m] \033[0;91mNo custom header was found...\033[0;0m" << endl;
         return ERROR;
     }
 }
@@ -364,7 +364,8 @@ int OutputBindedData(vector<char>& buffer, string& fileExtension)
     if (fileExtension == "")
         fileName = "output";
     else
-        fileName = "output." + fileExtension;
+        fileName = "output";
+        // fileName = "output." + fileExtension;
 
     ofstream output(fileName, std::ios::binary);
     output.write((const char*)&buffer[0], buffer.size());
